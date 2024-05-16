@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Login</title>
+    <link rel="stylesheet" href="" th:href="@{/css/style_login.css}">
+</head>
+
+<body>
+    <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span>
+        <div class="signin">
+            <div class="content">
+                <h2>Sign In</h2>
+
+                <form th:action="@{/member/checklogin}" method="post">
+                    <div class="inputBox">
+                        <input type="text" name="matv" oninput="validateMatv(this)" id="matv"
+                            required> <i>MaTV</i>
+                        <div id="matvError" style="color: red; display: none;">Vui lòng chỉ nhập số</div>
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="password" name="password" id="password" required> <i>Password</i>
+                    </div>
+
+                    <div class="links">
+                        <a href="/forgotpassword">Forgot Password</a>
+                        <a href="/changepassword">Change Password</a>
+                        <a href="/register">Register</a>
+                    </div>
+                    <p style="color: red" th:text="${ERROR}"></p>
+
+                    <div class="inputBox">
+                        <input type="submit" value="Login">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </section> <!-- partial -->
+
+</body>
+<script>
+    function validateMatv(input) {
+        var matvInput = input.value;
+        var matvPattern = /^[0-9]{1,10}$/;
+        var matvError = document.getElementById('matvError');
+
+
+        if (matvInput.trim() === '') {
+            matvError.style.display = 'none';
+        } else if (!matvPattern.test(matvInput)) {
+            matvError.style.display = 'block';
+        } else {
+            matvError.style.display = 'none';
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <link rel="stylesheet" href="" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- Pikaday CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.min.css" rel="stylesheet">
+    <!-- bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+    <body>
+        <!-- top navbar -->
+        <div class="top-navbar">
+            <p>WELCOME TO OUR ELECTRONIC PRODUCTS</p>
+            <div class="icons">
+                <span th:text="${session.hovaten}"></span><br>
+                <span th:text="${session.MATV}"></span><br>
+               </div>
+        </div>
+        <!-- top navbar -->
+
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg" id="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" id="logo"><span id="span1">E</span>Lectronic<span> Management</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span><img src="./images/menu.png" alt="" width="30px"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#product-cards">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart">
+                                <span class="fa-solid fa-cart-shopping"></span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+        <!-- navbar -->
+
+        <!-- product cards -->
+        <div class="container" id="product-cards">
+            <h1 class="text-center">DETAIL</h1>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-3 py-3 py-md-0" th:each="item, iterStat : ${thietbiop}" >
+                    <div style=" justify-content: center; margin-left: 100%">
+                        <img src="./images/p6.png" alt="">
+                    </div>
+                </div>
+
+                <div class="py-3 py-md-0" th:each="item, iterStat : ${thietbiop}">
+                    <div class="">
+                        <div class="">
+                            
+                            
+                            <h3><p>Mã thiết bị: <span th:text="${item.maTB}"></span></p></h3>
+                            <h3><p>Tên thiết bị: <span th:text="${item.tenTB}"></span></p></h3>
+                            <h3><p>Mô tả: <span th:text="${item.mo_tatb}"></span></p></h3>
+
+                             <!-- Pikaday calendar -->
+                            <div class="py-3 py-md-0" style="margin-top: 30px;">
+                                <div class="row">
+                                    <div class="">
+                                        <div style="margin-left: 50px">
+                                            <label for="bookingDateTime">Chọn ngày và giờ đặt chỗ:</label>
+                                            <input type="text" id="bookingDateTime" name="bookingDateTime" th:value="${session.Date}">
+                                        </div>
+                                        <div class="btn" id="maTB">
+                                            <form id="checkForm" action="/checkdate" method="POST">
+                                                <input type="hidden" name="maTB" th:value="${item.maTB}">
+                                                <input type="hidden" id="bookingDateTimeHidden" name="bookingDateTime">
+                                                <input type="hidden" name="maTV" th:value="${session.MATV}">
+                                                <br>
+                                                <button id="check-date-btn" type="button">Check</button>
+                                                 
+                                            </form>
+                                        </div>
+                                       
+                                </div>
+                            </div>
+                            <!-- Pikaday calendar -->
+<!--                            <div style="display: flex; margin-top: 20px">
+                                <h2>Trạng thái: <span style="padding-left: 5px; border: 1px solid black; background: black; color: white;"></span></h2>
+                            </div>-->
+
+                            <div style="display: flex; margin-top: 20px">
+                                <h2>Trạng thái: 
+                                    <span th:if="${listThongtinsd != null && listThongtinsd.size() > iterStat.index}" 
+                                          th:text="${listThongtinsd[iterStat.index].trangThai}" 
+                                          style="padding-left: 5px;">
+                                    </span>
+                                    <span th:unless="${listThongtinsd != null && listThongtinsd.size() > iterStat.index}">
+                                        Có sẵn
+                                    </span>
+                                </h2>
+                            </div>
+                            <!--<div class="btn"><button id="book-now-btn"> Book now</button></div>-->
+                           
+                            <div class="btn" th:unless="${listThongtinsd != null && listThongtinsd.size() > iterStat.index}">
+                                <form id="checkbook" action="/checkbook" method="POST">
+                                    <input type="hidden" name="maTB" th:value="${item.maTB}">
+                                    <input type="hidden" id="bookingDateTimeHidden" name="bookingDateTime" th:value="${session.Date}">
+                                    <input type="hidden" name="maTV" th:value="${session.MATV}">
+                                    <div th:if="${session.ERROR}">
+                                         <p style="color: red;" th:text="${session.ERROR}"></p>
+                                        <button id="book-now-btn" type="button" style="display:none;"> Book now</button>
+                                    </div>
+                                    <div th:if="${session.SUCCESS}">
+                                        <p style="color: red;" th:text="${session.SUCCESS}"></p>
+                                        <button id="book-now-btn" type="button" style="display:block;"> Book now</button>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div id="alertMessage" class="alert alert-success" style="display: none;">
+                                Đặt chỗ thành công
+                            </div>
+                            
+                            <div id="invalidDateTimeAlert" class="alert alert-danger" style="display: none;">
+                                Thời gian đặt chổ không hợp lệ.
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- product cards -->
+
+        
+
+        <!-- footer -->
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <!-- Content footer -->
+                </div>
+            </div>
+        </footer>
+        <!-- footer -->
+
+        <!-- Pikaday JS -->
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+        <script>
+//            var picker = new Pikaday({
+//                field: document.getElementById('datepicker'),
+//                format: 'YYYY-MM-DD',
+//                onSelect: function(date) {
+//                    console.log('Selected date: ' + date);
+//                }
+//            });
+            
+            document.getElementById('book-now-btn').addEventListener('click', function() {
+                event.preventDefault();
+                var bookingDateTime = document.getElementById('bookingDateTime').value;
+                if (!bookingDateTime) {
+                    alert('Bạn cần chọn ngày và giờ đặt chỗ.');
+                } else {
+                    var currentDate = new Date();
+                    var selectedDateTime = new Date(bookingDateTime);
+                    if (selectedDateTime <= currentDate) {
+                        document.getElementById('invalidDateTimeAlert').style.display = 'block';
+                        document.getElementById('alertMessage').style.display = 'none';
+                    } else {
+                        document.getElementById('invalidDateTimeAlert').style.display = 'none';
+                        document.getElementById('bookingDateTimeHidden').value = bookingDateTime;
+                        document.getElementById('alertMessage').style.display = 'block';
+                        document.getElementById("checkbook").submit()
+                    }
+                }
+            });
+        </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#bookingDateTime", {
+                enableTime: true, 
+                dateFormat: "Y-m-d H:i:s", 
+                time_24hr: true, 
+                minuteIncrement: 1, 
+            });
+        });
+            document.getElementById("check-date-btn").addEventListener("click", function() {
+            var bookingDateTime = document.getElementById("bookingDateTime").value;
+            if (bookingDateTime.trim() === "") {
+                alert("Vui lòng chọn ngày và giờ đặt chỗ.");
+            } else {
+                    var currentDate = new Date();
+                    var selectedDateTime = new Date(bookingDateTime);
+                    if (selectedDateTime <= currentDate) {
+                        document.getElementById('invalidDateTimeAlert').style.display = 'block';
+                        document.getElementById('alertMessage').style.display = 'none';
+                    }else{
+                        document.getElementById("bookingDateTimeHidden").value = bookingDateTime;
+                        document.getElementById("checkForm").submit();
+                }
+            }
+        });
+           
+        </script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    </body>
+</html>
