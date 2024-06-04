@@ -112,13 +112,13 @@ public class thanhvienController {
     
     @PostMapping("/member/checkregister")
     public String checkregister(Model model, @ModelAttribute("tv") thanhvien tv, HttpSession session) {
-        boolean check = memberService.checkRegister(tv);
+        boolean check = memberService.checkEmail(tv.getMaTV(),tv.getEmail());
         if (!check) {
+           memberRopository.save(tv);
+           return "login"; 
+        } else {
             model.addAttribute("ERROR", "MaTV or Email already exists");
             return "register"; 
-        } else {
-            memberRopository.save(tv);
-            return "redirect:/login"; 
         }
     }
     

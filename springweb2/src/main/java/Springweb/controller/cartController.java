@@ -53,13 +53,7 @@ public class cartController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(TGDatcho, formatter);
        
-        
-        
         thongtinsd newTtsd = ttsdServe.findByMaTBvsMaTV(Integer.parseInt(productId),Integer.parseInt(maTV),localDateTime); 
-         if(localDateTime.equals(newTtsd.getTGDatcho()))
-         {
-             
-         }
         newTtsd.setTGDatcho(null);
         newTtsd.setTGMuon(localDateTime);
         ttsdReposity.save(newTtsd);

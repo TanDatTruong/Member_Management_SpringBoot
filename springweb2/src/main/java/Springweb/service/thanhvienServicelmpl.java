@@ -4,6 +4,8 @@
  */
 package Springweb.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,21 +27,17 @@ public class thanhvienServicelmpl implements thanhvienService{
         return true;
     } 
 
-    @Override
-    public boolean checkRegister(thanhvien tv) {
-        thanhvien member = membersRepository.findbyEmail(tv.getMaTV(),tv.getEmail());
-        if(member == null){
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public boolean checkEmail(int matv, String email) {
         thanhvien member = membersRepository.findbyEmail(matv , email);
-        if(member == null)
+        if(member == null){
             return false;
-        return true;
+        }
+        else if(member != null){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -84,4 +82,5 @@ public class thanhvienServicelmpl implements thanhvienService{
         return member;
 
     }
+
 }

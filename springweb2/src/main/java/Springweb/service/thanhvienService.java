@@ -18,8 +18,6 @@ public interface thanhvienService {
    
    thanhvien getMember(int matv, String password);
    
-   boolean checkRegister(thanhvien tv);
-   
    boolean checkEmail(int matv, String email);
    
    String getEmail(String email);
